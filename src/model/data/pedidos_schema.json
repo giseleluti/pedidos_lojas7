@@ -1,0 +1,53 @@
+{
+  "Pedido": {
+    "type": "object",
+    "properties": {
+      "id_pedido": {
+        "type": "integer",
+        "description": "ID do pedido"
+      },
+      "produtos": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "id_produto": {
+              "type": "integer",
+              "description": "ID do produto"
+            },
+            "title": {
+              "type": "string",
+              "description": "Título do produto"
+            },
+            "price": {
+              "type": "number",
+              "description": "Preço do produto"
+            }
+          },
+          "example": {
+            "id_produto": 1,
+            "title": "Produto de Exemplo",
+            "price": 99.99
+          }
+        },
+        "description": "Lista de produtos no pedido"
+      }
+    },
+    "example": {
+      "id_pedido": 1,
+      "produtos": [
+        {
+          "id_produto": 1,
+          "title": "Smart phone",
+          "price": 5200.00
+        },
+                {
+          "id_produto": 2,
+          "title": "Notebook",
+          "price": 9900.99
+        }
+
+      ]
+    }
+  }
+}
