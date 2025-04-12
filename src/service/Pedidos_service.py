@@ -10,7 +10,7 @@ class PedidoService:
     @staticmethod
     def criar_pedido(pedido: Pedidos):
         try:
-            with PedidoDBService(db_path='pedidos.db') as db:
+            with PedidoDBService(db_path='Pedidos.db') as db:
                 db.salvar_pedido(pedido)
             return jsonify(pedido.dict()), 201
         except Exception as e:
@@ -19,7 +19,7 @@ class PedidoService:
     @staticmethod
     def obter_pedido(id_pedido: int):
         try:
-            with PedidoDBService(db_path='pedidos.db') as db:
+            with PedidoDBService(db_path='Pedidos.db') as db:
                 pedido = db.obter_pedido(id_pedido)
             if pedido:
                 pedido_dict = {
@@ -44,7 +44,7 @@ class PedidoService:
     @staticmethod
     def atualizar_pedido(id_pedido: int, pedido: Pedidos):
         try:
-            with PedidoDBService(db_path='pedidos.db') as db:
+            with PedidoDBService(db_path='Pedidos.db') as db:
                 db.atualizar_pedido(id_pedido, pedido)
         except Exception as e:
             return jsonify({'error': str(e)}), 500
@@ -52,7 +52,7 @@ class PedidoService:
     @staticmethod
     def excluir_pedido(id_pedido: int):
         try:
-            with PedidoDBService(db_path='pedidos.db            ') as db:
+            with PedidoDBService(db_path='Pedidos.db            ') as db:
                 db.excluir_pedido(id_pedido)
         except Exception as e:
             return jsonify({'error': str(e)}), 500

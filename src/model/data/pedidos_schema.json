@@ -4,7 +4,8 @@
     "properties": {
       "id_pedido": {
         "type": "integer",
-        "description": "ID do pedido"
+        "description": "ID do pedido",
+        "example": 0
       },
       "produtos": {
         "type": "array",
@@ -13,15 +14,18 @@
           "properties": {
             "id_produto": {
               "type": "integer",
-              "description": "ID do produto"
+              "description": "ID do produto",
+              "example": 1
             },
             "title": {
               "type": "string",
-              "description": "Título do produto"
+              "description": "Título do produto",
+              "example": "Smartphone"
             },
             "price": {
               "type": "number",
-              "description": "Preço do produto"
+              "description": "Preço do produto",
+              "example": 5200.00
             }
           },
           "example": {
@@ -34,7 +38,7 @@
       }
     },
     "example": {
-      "id_pedido": 1,
+      "id_pedido": 0,
       "produtos": [
         {
           "id_produto": 1,

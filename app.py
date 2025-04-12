@@ -10,10 +10,10 @@ from src.service.Pedidos_service import PedidoService
 app = Flask(__name__)
 
 # Configurações do Swagger
-app.config['SWAGGER_UI_JSONEDITOR'] = True
 app.config['SWAGGER'] = {
     'title': 'API Pedidos_lojas7 com base nos produtos da fakestore',
-    'uiversion': 3
+    'uiversion': 3,
+    'ui': 'swagger-ui'
 }
 swagger = Swagger(app)
 
@@ -22,33 +22,26 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
 logger = logging.getLogger(__name__)
 
 # Carrega o schema do arquivo JSON
-try:
-    with open('src/model/data/pedidos_schema.json', 'r') as f:
-        pedidos_schemas = json.load(f)
-except FileNotFoundError:
-    logger.warning("Arquivo pedidos_schema.json não encontrado. A documentação Swagger pode estar incompleta.")
-    pedidos_schemas = {}
+with open('src/model/data/pedidos_schema.json', 'r') as f:
+    pedido_schema = json.load(f)
 
 
 @app.route('/pedidos', methods=['POST'])
 @swag_from({
     'summary': 'Cria um novo pedido',
+    'consumes': ['application/json'],
     'parameters': [
         {
             'name': 'body',
             'in': 'body',
             'required': True,
-            'content': {
-                'application/json': {
-                    'schema': pedidos_schemas.get('Pedido', {})  # Usa o schema carregado
-                }
-            }
+            'schema': pedido_schema.get("Pedido", {}),  # Usa o schema carregado
         }
     ],
     'responses': {
         '201': {
             'description': 'Pedido criado com sucesso',
-            'schema': pedidos_schemas.get('Pedido', {})  # Usa o schema carregado
+            'schema': pedido_schema.get('Pedido', {})  # Usa o schema carregado
         },
         '500': {
             'description': 'Erro ao criar pedido'
@@ -82,7 +75,7 @@ def criar_pedido():
     'responses': {
         '200': {
             'description': 'Pedido encontrado',
-            'schema': pedidos_schemas.get('Pedido', {})  # Usa o schema carregado
+            'schema': pedido_schema.get('Pedido', {})  # Usa o schema carregado
         },
         '404': {
             'description': 'Pedido não encontrado'
@@ -114,7 +107,7 @@ def obter_pedido_rota(id_pedido: int):
             'name': 'body',
             'in': 'body',
             'required': True,
-            'schema': pedidos_schemas.get('Pedido', {})  # Usa o schema carregado
+            'schema': pedido_schema.get('Pedido', {})  # Usa o schema carregado
         }
     ],
     'responses': {
@@ -179,4 +172,4 @@ def redirect_to_swagger():
 
 if __name__ == '__main__':
     init_database()
-    app.run(host='0.0.0.0', port=5003)
+    app.run(debug=True, host='0.0.0.0', port=5003)

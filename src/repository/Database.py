@@ -65,5 +65,5 @@ class PedidoDBService:
 
 
 def init_database():
-    with PedidoDBService(db_path='src/model/data/pedidos.db') as db:
+    with PedidoDBService(db_path='Pedidos.db') as db:
         db.create_tables()
