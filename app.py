@@ -26,10 +26,9 @@ with open('src/model/data/pedidos_schema.json', 'r') as f:
     pedido_schema = json.load(f)
 
 
-@app.route('/pedidos', methods=['POST'])
+@app.route('/pedidos/criar', methods=['POST'])
 @swag_from({
     'summary': 'Cria um novo pedido',
-    'consumes': ['application/json'],
     'parameters': [
         {
             'name': 'body',
@@ -172,4 +171,4 @@ def redirect_to_swagger():
 
 if __name__ == '__main__':
     init_database()
-    app.run(debug=True, host='0.0.0.0', port=5003)
+    app.run(host='0.0.0.0', port=5003)
