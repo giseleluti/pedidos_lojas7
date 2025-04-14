@@ -52,7 +52,7 @@ class PedidoService:
     @staticmethod
     def excluir_pedido(id_pedido: int):
         try:
-            with PedidoDBService(db_path='Pedidos.db            ') as db:
+            with PedidoDBService(db_path='Pedidos.db') as db:
                 db.excluir_pedido(id_pedido)
         except Exception as e:
             return jsonify({'error': str(e)}), 500
